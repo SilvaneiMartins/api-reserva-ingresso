@@ -1,0 +1,40 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Event {
+    id          String   @id @default(uuid())
+    name        String
+    description String
+    date        DateTime
+    price       Float
+    createAt    DateTime @default(now())
+    updateAt    DateTime @updatedAt
+
+    Spot Spot[]
+
+    @@map("events")
+}
+
+model Spot {
+    id       String     @id @default(uuid())
+    name     String
+    status   SPOTSTATUS @default(AVAILABLE)
+    createAt DateTime   @default(now())
+    updateAt DateTime   @updatedAt
+
+    eventId String
+    Event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+    @@map("spots")
+}
+
+enum SPOTSTATUS {
+    AVAILABLE
+    RESERVED
+}
