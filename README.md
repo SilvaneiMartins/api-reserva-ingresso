@@ -3,7 +3,7 @@
 </p>
 
 <h2 align="center">
-    API AGENDAMENTO <br />
+    API RESERVA de INGRESSO  <br />
     Framework: Nest <br />
     Tipo: REST-API
 </h2>
